@@ -25,5 +25,11 @@ app.use((req, res, next) => {
 //ROUTES
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
+app.use('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'Fail',
+    message: `Can't find ${req.protocol}://${req.hostname}${req.originalUrl} on this server!`,
+  });
+});
 
 module.exports = app;
