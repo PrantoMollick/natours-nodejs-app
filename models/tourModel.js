@@ -107,9 +107,14 @@ tourSchema.pre('save', function (next) {
 //   next();
 // });
 
-// tourSchema.post('save', (doc, next) => {
-//   console.log(doc);
-//   next();
+// tourSchema.post('save', (error, doc, next) => {
+//   console.log('mongoError');
+//   if (error.name === 'MongoServerError' && error.code === 11000) {
+
+//     next(new Error('There was a duplicate key error'));
+//   } else {
+//     next();
+//   }
 // });
 
 //Query Middleware
