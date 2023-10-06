@@ -24,7 +24,7 @@ router
   .patch(tourController.updateTour)
   .delete(
     authContoller.protect,
-    // authContoller.restrictTo('admin', 'lead-guide'),
+    authContoller.restrictTo('admin', 'lead-guide'),
     tourController.deleteTour,
   );
 
