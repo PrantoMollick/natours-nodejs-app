@@ -9,7 +9,9 @@ router.post('/login', authContoller.login);
 
 router.post('/forgotPassword', authContoller.forgotPassword);
 router.patch('/resetPassword/:token', authContoller.resetPassword);
+
 router.patch('/updateMe', authContoller.protect, userController.updateMe);
+router.delete('/deleteMe', authContoller.protect, userController.deleteMe);
 
 router.patch(
   '/updateMyPassword',
