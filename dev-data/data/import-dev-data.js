@@ -14,7 +14,7 @@ mongoose.connect(DB).then(() => console.log('DB connection successful!'));
 
 //Read json file
 const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/tours-simple.json`, 'utf8'),
+  fs.readFileSync(`${__dirname}/tours.json`, 'utf8'),
 ).map((obj) => {
   const { id, ...rest } = obj;
   return rest;
