@@ -11,6 +11,11 @@ const filterObj = (obj, ...allowedFields) =>
     return acc; // Return the updated accumulator
   }, {});
 
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next();
+};
+
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Create error if user POSTS password data
   if (req.body.password || req.body.passwordConfirm) {

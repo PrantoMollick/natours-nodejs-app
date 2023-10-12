@@ -10,15 +10,15 @@ router.post('/login', authContoller.login);
 router.post('/forgotPassword', authContoller.forgotPassword);
 router.patch('/resetPassword/:token', authContoller.resetPassword);
 
-router.patch('/updateMe', authContoller.protect, userController.updateMe);
-router.delete('/deleteMe', authContoller.protect, userController.deleteMe);
+// protect all routes after this middleware
+router.use(authContoller.protect);
 
-router.patch(
-  '/updateMyPassword',
-  authContoller.protect,
-  authContoller.updatePassword,
-);
+router.get('/me', userController.getMe, userController.getUser);
+router.patch('/updateMe', userController.updateMe);
+router.delete('/deleteMe', userController.deleteMe);
+router.patch('/updateMyPassword', authContoller.updatePassword);
 
+router.use(authContoller.restrictTo('admin'));
 router
   .route('/')
   .get(userController.getAllUsers)
