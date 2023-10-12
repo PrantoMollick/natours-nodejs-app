@@ -209,7 +209,6 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
-  console.log('🎇🎇🎇');
 
   //User.findBy
   // 4) Log user in, send jwt
