@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const helmetCsp = require('helmet-csp');
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -35,7 +36,7 @@ const csp = helmetCsp({
       'https://unpkg.com',
       'https://fonts.gstatic.com',
     ],
-    scriptSrc: ["'self'", 'https://unpkg.com'],
+    scriptSrc: ["'self'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com'],
     fontSrc: [
       "'self'",
       'https://fonts.googleapis.com',
@@ -80,6 +81,7 @@ app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 // Data Sanitization against NosQL query injection
 app.use(mongoSanitize());
