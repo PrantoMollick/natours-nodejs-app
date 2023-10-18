@@ -1251,6 +1251,7 @@ body {
   box-sizing: border-box;
   /* Pseudo element (a visible thing that isn't really in the DOM).
       Also needs -ms- */
+  cursor: auto;
 }
 .form__input:focus {
   outline: none;
