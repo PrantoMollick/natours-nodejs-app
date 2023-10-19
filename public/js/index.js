@@ -1,13 +1,16 @@
 /* eslint-disable */
 
 import { login, logout } from './login';
+import { updateUserHandler } from './updateSettings';
 import { displayMap } from './mapbox';
+
 import L from 'leaflet';
 
 //DOM Elements
 const mapBoxEl = document.getElementById('map');
-const loginFormEl = document.querySelector('.form');
+const loginFormEl = document.querySelector('.form--login');
 const logoutBtnEl = document.querySelector('.nav__el--logout');
+const updateUserFormEl = document.querySelector('.form-user-data');
 
 //Values
 
@@ -25,3 +28,4 @@ loginFormEl?.addEventListener('submit', (e) => {
 });
 
 logoutBtnEl?.addEventListener('click', (e) => logout());
+updateUserFormEl?.addEventListener('submit', updateUserHandler);

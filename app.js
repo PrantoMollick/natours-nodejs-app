@@ -46,7 +46,7 @@ const csp = helmetCsp({
       "'self'",
       'https://tile.openstreetmap.org/',
       'https://unpkg.com/',
-
+      'http://localhost:3000/img/icons.svg',
       'data:',
     ],
     // styleSrc: [
@@ -81,6 +81,7 @@ app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // Data Sanitization against NosQL query injection
