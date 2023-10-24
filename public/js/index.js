@@ -3,6 +3,7 @@
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { displayMap } from './mapbox';
+import { bookTour } from './stripe';
 
 import L from 'leaflet';
 
@@ -12,6 +13,7 @@ const loginFormEl = document.querySelector('.form--login');
 const logoutBtnEl = document.querySelector('.nav__el--logout');
 const userDataFormEl = document.querySelector('.form-user-data');
 const userPasswordFormEl = document.querySelector('.form-user-password');
+const bookBtnEl = document.getElementById('book-tour');
 
 //Values
 
@@ -60,3 +62,8 @@ userPasswordFormEl?.addEventListener('submit', async (e) => {
 });
 
 logoutBtnEl?.addEventListener('click', (e) => logout());
+bookBtnEl?.addEventListener('click', (e) => {
+  e.target.textContent = 'Processing...';
+  const { tourId } = e.target.dataset;
+  bookTour(tourId);
+});
