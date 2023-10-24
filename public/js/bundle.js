@@ -5431,9 +5431,10 @@ var hideAlert = exports.hideAlert = function hideAlert() {
 
 //Type is 'success' or 'error'
 var showAlert = exports.showAlert = function showAlert(type, msg) {
+  var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 7;
   var markup = "<div class=\"alert alert--".concat(type, "\">").concat(msg, "</div>");
   document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-  setTimeout(hideAlert, 5000);
+  setTimeout(hideAlert, time * 1000);
 };
 },{}],"login.js":[function(require,module,exports) {
 "use strict";
@@ -20164,6 +20165,7 @@ var _login = require("./login");
 var _updateSettings = require("./updateSettings");
 var _mapbox = require("./mapbox");
 var _stripe = require("./stripe");
+var _alerts = require("./alerts");
 var _leaflet = _interopRequireDefault(require("leaflet"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -20236,12 +20238,14 @@ userPasswordFormEl === null || userPasswordFormEl === void 0 || userPasswordForm
 logoutBtnEl === null || logoutBtnEl === void 0 || logoutBtnEl.addEventListener('click', function (e) {
   return (0, _login.logout)();
 });
-bookBtnEl === null || bookBtnEl === void 0 ? void 0 : bookBtnEl.addEventListener('click', function (e) {
+bookBtnEl === null || bookBtnEl === void 0 || bookBtnEl.addEventListener('click', function (e) {
   e.target.textContent = 'Processing...';
   var tourId = e.target.dataset.tourId;
   (0, _stripe.bookTour)(tourId);
 });
-},{"./login":"login.js","./updateSettings":"updateSettings.js","./mapbox":"mapbox.js","./stripe":"stripe.js","leaflet":"../../node_modules/leaflet/dist/leaflet-src.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var alertMessage = document.querySelector('body').dataset.alert;
+if (alertMessage) (0, _alerts.showAlert)('success', alertMessage, 20);
+},{"./login":"login.js","./updateSettings":"updateSettings.js","./mapbox":"mapbox.js","./stripe":"stripe.js","./alerts":"alerts.js","leaflet":"../../node_modules/leaflet/dist/leaflet-src.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

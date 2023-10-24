@@ -4,6 +4,7 @@ import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { displayMap } from './mapbox';
 import { bookTour } from './stripe';
+import { showAlert } from './alerts';
 
 import L from 'leaflet';
 
@@ -67,3 +68,6 @@ bookBtnEl?.addEventListener('click', (e) => {
   const { tourId } = e.target.dataset;
   bookTour(tourId);
 });
+
+const alertMessage = document.querySelector('body').dataset.alert;
+if (alertMessage) showAlert('success', alertMessage, 20);

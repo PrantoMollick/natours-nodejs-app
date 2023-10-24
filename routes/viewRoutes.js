@@ -5,6 +5,8 @@ const bookingController = require('../controllers/bookingController');
 
 const router = express.Router();
 
+router.use(viewsController.alerts);
+
 router.route('/me').get(authContoller.protect, viewsController.getAccount);
 router.post(
   '/submit-user-data',
