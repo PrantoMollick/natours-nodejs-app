@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const helmetCsp = require('helmet-csp');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -19,12 +20,24 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+app.enable('trust proxy');
 //Template render enginee setup
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // 1) GLOBAL MIDDLEWARES
 // Set Security HTTP headers
+//implement CORS
+app.use(cors());
+// Access-Control-Allow-Origin *
+
+//api.natours.com, front-end endnatours.com
+// app.use(
+//   cros({
+//     origin: 'https://www.natours.com',
+//   }),
+// );
+
 app.use(helmet());
 // Configure the Content Security Policy
 // app.use(helmetCsp());
