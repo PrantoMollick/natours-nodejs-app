@@ -12,13 +12,11 @@ router.post(
   viewsController.updateUserData,
 );
 
-router
-  .route('/')
-  .get(
-    bookingController.createBookingCheckout,
-    authContoller.isLoggedIn,
-    viewsController.getOverview,
-  );
+router.route('/').get(
+  // bookingController.createBookingCheckout,
+  authContoller.isLoggedIn,
+  viewsController.getOverview,
+);
 
 router
   .route('/tour/:slug')
